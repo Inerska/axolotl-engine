@@ -15,8 +15,6 @@ namespace ax::exception
     public:
         explicit exception_base(const std::string &message) : std::runtime_error(message)
         {}
-
-        ~exception_base() override = default;
     };
 }
 #endif //_EXCEPTION_BASE_H
