@@ -8,19 +8,24 @@ cmake_policy(SET CMP0091 NEW)
 project(. LANGUAGES CXX C)
 
 # target
-add_executable(. "")
+add_executable(. "" src/exception/glfw_null_error_exception.h)
 set_target_properties(. PROPERTIES OUTPUT_NAME ".")
 set_target_properties(. PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x86/release")
 target_include_directories(. PRIVATE
     C:/Users/Inerska/.conan/data/flecs/2.4.8/_/_/package/d4bb31912cc39810f01c804d7ba2f80b8bd35a3a/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/8eba7f0a08d64bdf8a9c5b8b8c80e519/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/4d07a257d6ec41b6afb6ee5ccd101bc9/include
 )
 target_compile_definitions(. PRIVATE
     flecs_STATIC
+    GLFW_INCLUDE_NONE
 )
+set_property(TARGET . PROPERTY CXX_STANDARD 17)
 target_compile_options(. PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
+target_compile_features(. PRIVATE cxx_std_17)
 if(MSVC)
     target_compile_options(. PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()
@@ -32,11 +37,28 @@ if(MSVC)
 endif()
 target_link_libraries(. PRIVATE
     flecs_static
+    glfw3
+    opengl32
+    glad
+    user32
+    shell32
+    gdi32
 )
 target_link_directories(. PRIVATE
     C:/Users/Inerska/.conan/data/flecs/2.4.8/_/_/package/d4bb31912cc39810f01c804d7ba2f80b8bd35a3a/lib
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/8eba7f0a08d64bdf8a9c5b8b8c80e519/lib
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/4d07a257d6ec41b6afb6ee5ccd101bc9/lib
 )
 target_sources(. PRIVATE
     src/main.cpp
+    src/wt/glfw_platform.cpp
+    src/wt/glfw_wrapper.cpp
+    src/exception/exception_base.h
+    src/exception/glfw_initialization_exception.h
+    src/exception/window_creation_exception.h
+    src/service/glfw_error_humanizer_service.h
+    src/wt/glfw_config_cook.h
+    src/wt/glfw_platform.h
+    src/wt/glfw_wrapper.h
 )
 
