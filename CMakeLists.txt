@@ -11,6 +11,12 @@ project(. LANGUAGES CXX C)
 add_executable(. "")
 set_target_properties(. PROPERTIES OUTPUT_NAME ".")
 set_target_properties(. PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x86/release")
+target_include_directories(. PRIVATE
+    C:/Users/Inerska/.conan/data/flecs/2.4.8/_/_/package/d4bb31912cc39810f01c804d7ba2f80b8bd35a3a/include
+)
+target_compile_definitions(. PRIVATE
+    flecs_STATIC
+)
 target_compile_options(. PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
@@ -24,6 +30,12 @@ if(MSVC)
     set_property(TARGET . PROPERTY
         MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
+target_link_libraries(. PRIVATE
+    flecs_static
+)
+target_link_directories(. PRIVATE
+    C:/Users/Inerska/.conan/data/flecs/2.4.8/_/_/package/d4bb31912cc39810f01c804d7ba2f80b8bd35a3a/lib
+)
 target_sources(. PRIVATE
     src/main.cpp
 )
