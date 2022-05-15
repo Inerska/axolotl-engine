@@ -10,7 +10,7 @@
 
 namespace ax::exception
 {
-    class glfw_initialization_exception : public ax::exception::exception_base
+    class glfw_initialization_exception final : public ax::exception::exception_base
     {
     public:
         explicit glfw_initialization_exception(const std::string &message) : exception_base(message)
