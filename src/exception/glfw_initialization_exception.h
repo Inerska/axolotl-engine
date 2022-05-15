@@ -13,7 +13,7 @@ namespace ax::exception
     class glfw_initialization_exception : public ax::exception::exception_base
     {
     public:
-        glfw_initialization_exception(const std::string &message) : exception_base(message)
+        explicit glfw_initialization_exception(const std::string &message) : exception_base(message)
         {}
     };
 }

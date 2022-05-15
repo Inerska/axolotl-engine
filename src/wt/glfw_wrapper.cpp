@@ -22,7 +22,7 @@ ax::wt::window_t::window_t(int32_t width, int32_t height, std::string title)
 
     auto window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
 
-    if (!window)
+    if (window == nullptr)
     {
         auto error = ax::service::glfw_error_humanizer_service::get_human_readable_error();
 
@@ -32,5 +32,5 @@ ax::wt::window_t::window_t(int32_t width, int32_t height, std::string title)
 
     glfwMakeContextCurrent(window);
 
-    buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, glfwDestroyWindow);
+    buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
 }

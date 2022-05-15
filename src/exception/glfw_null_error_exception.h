@@ -13,7 +13,7 @@ namespace ax::exception
     class glfw_null_error_exception : public ax::exception::exception_base
     {
     public:
-        glfw_null_error_exception(const char *message) : exception_base(message)
+        explicit glfw_null_error_exception(const char *message) : exception_base(message)
         {}
     };
 }

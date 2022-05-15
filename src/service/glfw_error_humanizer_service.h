@@ -18,9 +18,9 @@ namespace ax::service
         static inline std::string get_human_readable_error() noexcept
         {
             const char *error = nullptr;
-            glfwGetError(&error);
+            (void)glfwGetError(&error);
 
-            return std::string{error ? error : "No error"};
+            return std::string{error == nullptr ? error : "No error"};
         }
     };
 }

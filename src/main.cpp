@@ -2,9 +2,7 @@
 
 int main()
 {
-    using namespace ax::wt;
-
-    window_t window = window_t(640, 480, "Hello World");
+    ax::wt::window_t window = ax::wt::window_t(640, 480, "Hello World");
 
     while (!window.should_close())
     {
