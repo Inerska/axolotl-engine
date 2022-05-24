@@ -94,10 +94,7 @@ int main()
 #include <iostream>
 
 #include <glad/glad.h>
-#include <catch2/catch.hpp>
 #include <GLFW/glfw3.h>
-
-
 
 int main()
 {

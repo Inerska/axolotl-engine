@@ -1,11 +1,10 @@
 ﻿cmake_minimum_required(VERSION 3.22)
 
-project(axolotl-engine)
+project(axolotl-engine CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "*.h" "*.cpp")
+set(CMAKE_CXX_STANDARD 20)
 
-add_subdirectory(samples)
+enable_testing()
 
 include(cmake/CPM.cmake)
 
@@ -28,7 +27,16 @@ CPMFindPackage(
         "GLFW_BUILD_INSTALL OFF"
 )
 
+# library
 
-add_executable(${PROJECT_NAME} ${SOURCES})
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+file(GLOB_RECURSE CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
+
+add_library(${PROJECT_NAME}
+        ${CPP_FILES})
+
+add_library(axolotl-engine::axolotl-engine ALIAS axolotl-engine)
+
 target_link_libraries(${PROJECT_NAME} glad glfw)
+
+add_subdirectory(samples)
