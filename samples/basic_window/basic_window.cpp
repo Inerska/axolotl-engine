@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include "../../src/wt/glfw_wrapper.h"
-#include "GLFW/glfw3.h"
 
 int main()
 {
@@ -16,7 +15,7 @@ int main()
     while (!window.should_close())
     {
         window.swap_buffers();
-        glfwPollEvents();
+        window.poll_events();
     }
 
     return 0;

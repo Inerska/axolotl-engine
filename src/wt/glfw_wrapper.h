@@ -46,6 +46,11 @@ namespace ax::wt
         {
             glfwSwapBuffers(buffer_.get());
         }
+
+        void poll_events()
+        {
+            glfwPollEvents();
+        }
     };
 }
 #endif //_GLFW_WRAPPER_H
