@@ -27,16 +27,31 @@ CPMFindPackage(
         "GLFW_BUILD_INSTALL OFF"
 )
 
+
+CPMAddPackage(
+        NAME googletest
+        GITHUB_REPOSITORY google/googletest
+        GIT_TAG release-1.8.1
+        VERSION 1.8.1
+        OPTIONS
+        "INSTALL_GTEST OFF"
+        "gtest_force_shared_crt ON"
+)
+
 # library
 
 file(GLOB_RECURSE CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h)
 
 add_library(${PROJECT_NAME}
-        ${CPP_FILES})
+        ${CPP_FILES}
+        ${HEADER_FILES})
+
+include_directories(src)
 
 add_library(axolotl-engine::axolotl-engine ALIAS axolotl-engine)
 
-target_link_libraries(${PROJECT_NAME} glad glfw)
+target_link_libraries(${PROJECT_NAME} PUBLIC glad glfw gtest)
 
 add_subdirectory(samples)
+add_subdirectory(test)
