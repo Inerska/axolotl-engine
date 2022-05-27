@@ -60,12 +60,26 @@ namespace ax::logging
      */
     struct log_t
     {
+        /**
+         * @brief Log function for the given logging level and message.
+         * @tparam T The type of the content to log.
+         * @param level The logging level.
+         * @param message The message to log.
+         */
         template<typename T>
         constexpr static void log(const log_level_t::type &level, const T &message)
         {
             std::cout << "[" << log_level_t::to_string(level) << "] " << message << std::endl;
         }
 
+        /**
+         * @brief Log function for the given logging level and message vargs.
+         * @tparam T The type of the content to log.
+         * @tparam Vargs The types of the vargs.
+         * @param level The logging level.
+         * @param message The message to log.
+         * @param args The vargs.
+         */
         template<typename T, typename... Vargs>
         constexpr static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
         {
