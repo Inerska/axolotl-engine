@@ -1,0 +1,15 @@
+﻿option("test")
+    set_default(false)
+    set_showmenu(true)
+    set_description("Build unit tests")
+option_end()
+
+add_requires("catch2")
+set_languages("cxx17")
+
+target("AxolotlEngineTests")
+    set_kind("binary")
+    set_group("tests")
+    add_files("**.cpp")
+        add_deps("AxolotlEngine")
+    add_packages("catch2")
