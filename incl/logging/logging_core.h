@@ -170,7 +170,7 @@ namespace ax::logging
          * @param message The message to log.
          */
         template<typename T>
-        const static void log(const log_level_t::type &level, const T &message)
+        constexpr static void log(const log_level_t::type &level, const T &message)
         {
             const auto date{debug_program_info_t::get_current_date()};
 
@@ -186,7 +186,7 @@ namespace ax::logging
          * @param args The vargs.
          */
         template<typename T, typename... Vargs>
-        const static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
+        constexpr static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
         {
             const auto date{debug_program_info_t::get_current_date()};
 
