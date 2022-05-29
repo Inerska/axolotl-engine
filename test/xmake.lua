@@ -5,7 +5,7 @@
 option_end()
 
 add_requires("catch2")
-set_languages("cxx17")
+set_languages("cxx20")
 
 target("AxolotlEngineTests")
     set_kind("binary")
