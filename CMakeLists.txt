@@ -13,6 +13,51 @@ target_include_directories(AxolotlEngine INTERFACE
     incl
 )
 # target
+add_executable(AxolotlEngineSamples "")
+set_target_properties(AxolotlEngineSamples PROPERTIES OUTPUT_NAME "AxolotlEngineSamples")
+set_target_properties(AxolotlEngineSamples PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x64/release")
+add_dependencies(AxolotlEngineSamples AxolotlEngine)
+target_include_directories(AxolotlEngineSamples PRIVATE
+    incl
+)
+target_include_directories(AxolotlEngineSamples PRIVATE
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/0f1d7b80c6f84759bc07798549faa20b/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/d58ee23747ff411aae74b40986460499/include
+)
+target_compile_definitions(AxolotlEngineSamples PRIVATE
+    GLFW_INCLUDE_NONE
+)
+target_compile_options(AxolotlEngineSamples PRIVATE
+    $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
+    $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
+)
+target_compile_features(AxolotlEngineSamples PRIVATE cxx_std_20)
+if(MSVC)
+    target_compile_options(AxolotlEngineSamples PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
+else()
+    target_compile_options(AxolotlEngineSamples PRIVATE -O3)
+endif()
+if(MSVC)
+    set_property(TARGET AxolotlEngineSamples PROPERTY
+        MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+target_link_libraries(AxolotlEngineSamples PRIVATE
+    glfw3
+    opengl32
+    glad
+    user32
+    shell32
+    gdi32
+)
+target_link_directories(AxolotlEngineSamples PRIVATE
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/0f1d7b80c6f84759bc07798549faa20b/lib
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/d58ee23747ff411aae74b40986460499/lib
+)
+target_sources(AxolotlEngineSamples PRIVATE
+    samples/basic_window/basic_window.cpp
+)
+
+# target
 add_executable(AxolotlEngineTests "")
 set_target_properties(AxolotlEngineTests PROPERTIES OUTPUT_NAME "AxolotlEngineTests")
 set_target_properties(AxolotlEngineTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x64/release")

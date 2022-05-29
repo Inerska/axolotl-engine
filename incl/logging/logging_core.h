@@ -6,10 +6,9 @@
 #ifndef AXOLOTL_ENGINE_LOGGING_CORE_H
 #define AXOLOTL_ENGINE_LOGGING_CORE_H
 
-#include <iostream>
-#include <memory>
 #include <string>
-#include <variant>
+#include <sstream>
+#include <iostream>
 
 namespace ax::logging
 {

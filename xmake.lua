@@ -17,4 +17,5 @@ do
 end
 target_end()
 
+includes "samples"
 includes "test"

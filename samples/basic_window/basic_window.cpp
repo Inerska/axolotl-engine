@@ -4,13 +4,14 @@
 // See the LICENSE file in the project root for more information.
 
 #include <iostream>
-#include "../../src/wt/glfw_wrapper.h"
+
+#include "wt/glfw_wrapper.h"
 
 int main()
 {
     std::cout << "sample hello-window" << std::endl;
 
-    ax::wt::window_t window = ax::wt::window_t(640, 480, "Hello World");
+    auto window = ax::wt::window_t(640, 480, "Hello World");
 
     while (!window.should_close())
     {

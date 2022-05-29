@@ -8,6 +8,12 @@
 
 #include <memory>
 #include <string>
+
+#include "service/glfw_error_humanizer_service.h"
+
+#include "exception/glfw_initialization_exception.h"
+#include "exception/window_creation_exception.h"
+
 #include "glfw_config_cook.h"
 
 namespace ax::wt
@@ -22,19 +28,12 @@ namespace ax::wt
 
     public:
 
-        inline window_t()
+        inline window_t() noexcept: buffer_(nullptr, nullptr)
+        {}
 
-        noexcept
-                : buffer_(nullptr, nullptr)
+        inline window_t(int32_t width, int32_t height, std::string title) : width_(width), height_(height),
+                                                                            title_(std::move(title))
         {
-
-        }
-
-        inline window_t(int32_t width, int32_t height, std::string title) : width_(width), height_(height), dfdf
-
-        title_ (std::move(title))
-        {
-
             if (glfwInit() == GLFW_FALSE)
             {
                 auto error = ax::service::glfw_error_humanizer_service::get_human_readable_error();
@@ -59,9 +58,7 @@ namespace ax::wt
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
-        inline ~window_t()
-
-        noexcept
+        inline ~window_t() noexcept
         {
             if (buffer_)
             {
@@ -87,5 +84,5 @@ namespace ax::wt
             glfwPollEvents();
         }
     };
-}
+} // namespace ax::wt
 #endif //_GLFW_WRAPPER_H
