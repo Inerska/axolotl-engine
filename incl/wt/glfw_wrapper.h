@@ -58,17 +58,6 @@ namespace ax::wt
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
-        inline ~window_t() noexcept
-        {
-            if (buffer_)
-            {
-                glfwDestroyWindow(buffer_.get());
-            }
-
-            glfwTerminate();
-        }
-
-
         [[nodiscard]] inline bool should_close() const
         {
             return glfwWindowShouldClose(buffer_.get());
