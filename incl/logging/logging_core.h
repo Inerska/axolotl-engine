@@ -64,15 +64,15 @@ namespace ax::logging
     {
         struct debug_program_info_time_t
         {
-            int32_t hour{};
-            int32_t minute{};
-            int32_t second{};
-            bool is_pm{};
+            int32_t hour_{};
+            int32_t minute_{};
+            int32_t second_{};
+            bool is_pm_{};
 
             friend std::ostream &operator<<(std::ostream &os, const debug_program_info_time_t &infoTime)
             {
-                os << infoTime.hour << ":" << infoTime.minute << ":" << infoTime.second << " "
-                   << (infoTime.is_pm ? "PM" : "AM");
+                os << infoTime.hour_ << ":" << infoTime.minute_ << ":" << infoTime.second_ << " "
+                   << (infoTime.is_pm_ ? "PM" : "AM");
 
                 return os;
             }
@@ -80,11 +80,11 @@ namespace ax::logging
 
         struct debug_program_info_date_t
         {
-            int month{};
-            int day{};
-            int year{};
+            int month_{};
+            int day_{};
+            int year_{};
 
-            debug_program_info_time_t time{};
+            debug_program_info_time_t time_{};
 
         private:
             inline std::string get_month_name(int month) const
@@ -122,21 +122,20 @@ namespace ax::logging
 
 
         public:
-
             inline friend std::ostream &operator<<(std::ostream &os, const debug_program_info_date_t &buffer)
             {
-                os << buffer.get_month_name(buffer.month) << " " << buffer.day << ", " << buffer.year << " "
-                   << buffer.time;
+                os << buffer.get_month_name(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
+                   << buffer.time_;
 
                 return os;
             }
         };
 
     private:
-        debug_program_info_date_t date{};
+        debug_program_info_date_t date_{};
 
-        std::string program_name{};
-        std::string method_name{};
+        std::string program_name_{};
+        std::string method_name_{};
     public:
 
         static debug_program_info_date_t &get_current_date()
@@ -145,16 +144,16 @@ namespace ax::logging
             std::tm *local_time{std::localtime(&time)};
             debug_program_info_time_t time_info{};
 
-            time_info.hour = local_time->tm_hour;
-            time_info.minute = local_time->tm_min;
-            time_info.second = local_time->tm_sec;
-            time_info.is_pm = local_time->tm_hour > 12;
+            time_info.hour_ = local_time->tm_hour;
+            time_info.minute_ = local_time->tm_min;
+            time_info.second_ = local_time->tm_sec;
+            time_info.is_pm_ = local_time->tm_hour > 12;
 
-            debug_program_info_date_t date_info{.time = time_info,};
+            debug_program_info_date_t date_info{.time_ = time_info,};
 
-            date_info.month = local_time->tm_mon + 1;
-            date_info.day = local_time->tm_mday;
-            date_info.year = local_time->tm_year + 1900;
+            date_info.month_ = local_time->tm_mon + 1;
+            date_info.day_ = local_time->tm_mday;
+            date_info.year_ = local_time->tm_year + 1900;
 
             return date_info;
         }
