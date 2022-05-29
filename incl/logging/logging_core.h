@@ -80,23 +80,53 @@ namespace ax::logging
 
         struct debug_program_info_date_t
         {
-            std::variant<std::string, int> month{};
+            int month{};
             int day{};
             int year{};
 
             debug_program_info_time_t time{};
 
-            friend std::ostream &operator<<(std::ostream &os, const debug_program_info_date_t &buffer)
+        private:
+            inline std::string get_month_name(int month) const
             {
-                if (std::holds_alternative<std::string>(buffer.month))
+                switch (month)
                 {
-                    os << std::get<std::string>(buffer.month) << " ";
-                } else
-                {
-                    os << std::get<int>(buffer.month) << " ";
+                    case 1:
+                        return "January";
+                    case 2:
+                        return "February";
+                    case 3:
+                        return "March";
+                    case 4:
+                        return "April";
+                    case 5:
+                        return "May";
+                    case 6:
+                        return "June";
+                    case 7:
+                        return "July";
+                    case 8:
+                        return "August";
+                    case 9:
+                        return "September";
+                    case 10:
+                        return "October";
+                    case 11:
+                        return "November";
+                    case 12:
+                        return "December";
+                    default:
+                        return "Unknown";
                 }
+            }
 
-                os << buffer.day << ", " << buffer.year << " ";
+
+        public:
+
+            inline friend std::ostream &operator<<(std::ostream &os, const debug_program_info_date_t &buffer)
+            {
+                os << buffer.get_month_name(buffer.month) << " " << buffer.day << ", " << buffer.year << " "
+                   << buffer.time;
 
                 return os;
             }
@@ -120,9 +150,7 @@ namespace ax::logging
             time_info.second = local_time->tm_sec;
             time_info.is_pm = local_time->tm_hour > 12;
 
-            debug_program_info_date_t date_info{
-                    .time = time_info,
-            };
+            debug_program_info_date_t date_info{.time = time_info,};
 
             date_info.month = local_time->tm_mon + 1;
             date_info.day = local_time->tm_mday;
@@ -142,9 +170,11 @@ namespace ax::logging
          * @param message The message to log.
          */
         template<typename T>
-        constexpr static void log(const log_level_t::type &level, const T &message)
+        const static void log(const log_level_t::type &level, const T &message)
         {
-            std::cout << "[" << log_level_t::to_string(level) << "] " << message << std::endl;
+            const auto date{debug_program_info_t::get_current_date()};
+
+            std::cerr << date << "\n" << ax::logging::log_level_t::to_string(level) << ": " << message << "\n";
         }
 
         /**
@@ -156,9 +186,13 @@ namespace ax::logging
          * @param args The vargs.
          */
         template<typename T, typename... Vargs>
-        constexpr static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
+        const static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
         {
+            const auto date{debug_program_info_t::get_current_date()};
 
+            std::cerr << date << "\n" << ax::logging::log_level_t::to_string(level) << ": " << message << "\n";
+
+            log(level, args...);
         }
     };
 };
