@@ -31,7 +31,7 @@ namespace ax::logging
          * @param level
          * @return The string representation of the given logging level.
          */
-        static constexpr auto to_string(const type &level)
+        static const std::string to_string(const type &level)
         {
             switch (level)
             {
