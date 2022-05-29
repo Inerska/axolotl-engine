@@ -138,7 +138,7 @@ namespace ax::logging
         std::string method_name_{};
     public:
 
-        static debug_program_info_date_t &get_current_date()
+        static debug_program_info_date_t get_current_date()
         {
             std::time_t time{std::time(0)};
             std::tm *local_time{std::localtime(&time)};
@@ -155,9 +155,7 @@ namespace ax::logging
             date_info.day_ = local_time->tm_mday;
             date_info.year_ = local_time->tm_year + 1900;
 
-            static debug_program_info_date_t time_info_static{date_info};
-
-            return time_info_static;
+            return date_info;
         }
 
     };
