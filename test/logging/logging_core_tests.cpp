@@ -15,32 +15,20 @@ TEST_CASE("Logging level string is the same as expected", "[logging]")
     REQUIRE(std::string(logging_level::to_string(logging_level::verbose)).compare("VERBOSE") == 0);
 }
 
-TEST_CASE("Logging debug get day should be valid for int", "[logging]")
+TEST_CASE("Logging debug get day_ should be valid for int", "[logging]")
 {
     const auto date{ax::logging::debug_program_info_t::get_current_date()};
 
-    REQUIRE(date.day > 0);
-    REQUIRE(date.day <= 31);
+    REQUIRE(date.day_ > 0);
+    REQUIRE(date.day_ <= 31);
 }
 
-TEST_CASE("Logging debug get date month should be valid for int", "[logging]")
+TEST_CASE("Logging debug get date_ year_ should be valid for int", "[logging]")
 {
     const auto date{ax::logging::debug_program_info_t::get_current_date()};
-    const auto month{date.month};
+    const auto year{date.year_};
 
-    if (std::holds_alternative<int>(month))
-    {
-        const auto month_int{std::get<int>(month)};
-
-        REQUIRE(month_int >= 1);
-        REQUIRE(month_int <= 12);
-    }
-}
-
-TEST_CASE("Logging debug get date year should be valid for int", "[logging]")
-{
-    const auto date{ax::logging::debug_program_info_t::get_current_date()};
-    const auto year{date.year};
+    ax::logging::log_t::log(logging_level::debug, "Year: %d");
 
     REQUIRE(typeid(year) == typeid(int));
     REQUIRE(year > 0);
