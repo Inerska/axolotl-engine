@@ -13,6 +13,7 @@ int main()
 
     auto window = ax::wt::window_t(640, 480, "Hello World");
 
+    #pragma unroll
     while (!window.should_close())
     {
         window.swap_buffers();
