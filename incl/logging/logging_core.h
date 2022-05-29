@@ -155,7 +155,9 @@ namespace ax::logging
             date_info.day_ = local_time->tm_mday;
             date_info.year_ = local_time->tm_year + 1900;
 
-            return date_info;
+            static debug_program_info_date_t time_info_static{date_info};
+
+            return time_info_static;
         }
 
     };

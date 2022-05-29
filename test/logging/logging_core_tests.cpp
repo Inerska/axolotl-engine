@@ -15,7 +15,7 @@ TEST_CASE("Logging level string is the same as expected", "[logging]")
     REQUIRE(std::string(logging_level::to_string(logging_level::verbose)).compare("VERBOSE") == 0);
 }
 
-TEST_CASE("Logging debug get day_ should be valid for int", "[logging]")
+TEST_CASE("Logging debug get day should be valid for int", "[logging]")
 {
     const auto date{ax::logging::debug_program_info_t::get_current_date()};
 
@@ -23,7 +23,7 @@ TEST_CASE("Logging debug get day_ should be valid for int", "[logging]")
     REQUIRE(date.day_ <= 31);
 }
 
-TEST_CASE("Logging debug get date_ year_ should be valid for int", "[logging]")
+TEST_CASE("Logging debug get date year should be valid for int", "[logging]")
 {
     const auto date{ax::logging::debug_program_info_t::get_current_date()};
     const auto year{date.year_};
