@@ -1,6 +1,9 @@
 ﻿set_project "AxolotlEngine"
 
-add_rules("mode.asan", "mode.coverage", "mode.debug", "mode.releasedbg", "mode.release")
+add_requires("glad", "glfw", { system = false })
+add_packages("glfw", "glad")
+
+add_rules("mode.debug", "mode.release")
 
 target "AxolotlEngine"
 
@@ -10,6 +13,7 @@ do
     set_languages "cxx20"
     add_headerfiles "incl/**.h"
     add_includedirs("incl", { interface = true })
+
 end
 target_end()
 

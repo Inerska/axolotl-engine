@@ -15,20 +15,24 @@ target_include_directories(AxolotlEngine INTERFACE
 # target
 add_executable(AxolotlEngineTests "")
 set_target_properties(AxolotlEngineTests PROPERTIES OUTPUT_NAME "AxolotlEngineTests")
-set_target_properties(AxolotlEngineTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x86/release")
+set_target_properties(AxolotlEngineTests PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/windows/x64/release")
 add_dependencies(AxolotlEngineTests AxolotlEngine)
 target_include_directories(AxolotlEngineTests PRIVATE
     incl
 )
 target_include_directories(AxolotlEngineTests PRIVATE
-    C:/Users/Inerska/AppData/Local/.xmake/packages/c/catch2/2.13.9/86af67fe1ad54163bb40eb13d659cdaf/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/0f1d7b80c6f84759bc07798549faa20b/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/d58ee23747ff411aae74b40986460499/include
+    C:/Users/Inerska/AppData/Local/.xmake/packages/c/catch2/2.13.9/3a1bbf28f3624149b1a6a233fc0bffc0/include
 )
-set_property(TARGET AxolotlEngineTests PROPERTY CXX_STANDARD 17)
+target_compile_definitions(AxolotlEngineTests PRIVATE
+    GLFW_INCLUDE_NONE
+)
 target_compile_options(AxolotlEngineTests PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-DNDEBUG>
     $<$<COMPILE_LANGUAGE:CXX>:-DNDEBUG>
 )
-target_compile_features(AxolotlEngineTests PRIVATE cxx_std_17)
+target_compile_features(AxolotlEngineTests PRIVATE cxx_std_20)
 if(MSVC)
     target_compile_options(AxolotlEngineTests PRIVATE $<$<CONFIG:Release>:-Ox -fp:fast>)
 else()
@@ -38,6 +42,18 @@ if(MSVC)
     set_property(TARGET AxolotlEngineTests PROPERTY
         MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 endif()
+target_link_libraries(AxolotlEngineTests PRIVATE
+    glfw3
+    opengl32
+    glad
+    user32
+    shell32
+    gdi32
+)
+target_link_directories(AxolotlEngineTests PRIVATE
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glfw/3.3.6/0f1d7b80c6f84759bc07798549faa20b/lib
+    C:/Users/Inerska/AppData/Local/.xmake/packages/g/glad/v0.1.36/d58ee23747ff411aae74b40986460499/lib
+)
 target_sources(AxolotlEngineTests PRIVATE
     test/logging/logging_core_tests.cpp
     test/main.cpp
