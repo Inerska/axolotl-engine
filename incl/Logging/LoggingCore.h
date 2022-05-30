@@ -73,12 +73,12 @@ namespace ax::logging
             int32_t hour_{};
             int32_t minute_{};
             int32_t second_{};
-            bool is_pm_{};
+            bool isPm_{};
 
             friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoTime &infoTime)
             {
                 os << infoTime.hour_ << ":" << infoTime.minute_ << ":" << infoTime.second_ << " "
-                   << (infoTime.is_pm_ ? "PM" : "AM");
+                   << (infoTime.isPm_ ? "PM" : "AM");
 
                 return os;
             }
@@ -93,7 +93,7 @@ namespace ax::logging
             DebugProgramInfoTime time_{};
 
         private:
-            inline std::string GetMonthName(int month) const
+            [[nodiscard]] static inline std::string GetMonthName(int month)
             {
                 switch (month)
                 {
@@ -140,8 +140,8 @@ namespace ax::logging
     private:
         DebugProgramInfoDate date_{};
 
-        std::string program_name_{};
-        std::string method_name_{};
+        std::string programName_{};
+        std::string methodName_{};
     public:
 
         static DebugProgramInfoDate GetCurrentDate()
@@ -153,7 +153,7 @@ namespace ax::logging
             time_info.hour_ = local_time->tm_hour;
             time_info.minute_ = local_time->tm_min;
             time_info.second_ = local_time->tm_sec;
-            time_info.is_pm_ = local_time->tm_hour > 12;
+            time_info.isPm_ = local_time->tm_hour > 12;
 
             DebugProgramInfoDate date_info{.time_ = time_info,};
 
@@ -200,6 +200,6 @@ namespace ax::logging
             (Log(level, args), ...);
         }
     };
-};
+}
 
 #endif //AXOLOTL_ENGINE_LOGGING_CORE_H

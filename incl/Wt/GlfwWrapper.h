@@ -32,7 +32,7 @@ namespace ax::wt {
         Window(int32_t width, int32_t height, std::string title) : width_(width), height_(height),
                                                                    title_(std::move(title)) {
             if (glfwInit() == GLFW_FALSE) {
-                auto error = ax::service::GLfwErrorHumanizerService::get_human_readable_error();
+                auto error = ax::service::GLfwErrorHumanizerService::GetError();
 
                 std::cout << "GLFW initialization failed: " << error << std::endl;
 
@@ -42,7 +42,7 @@ namespace ax::wt {
             auto *window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
 
             if (window == nullptr) {
-                auto error = ax::service::GLfwErrorHumanizerService::get_human_readable_error();
+                auto error = ax::service::GLfwErrorHumanizerService::GetError();
 
                 std::cout << "Window creation failed with error: " << error << std::endl;
                 throw ax::exception::WindowCreationException(error);
