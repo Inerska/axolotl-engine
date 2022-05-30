@@ -28,8 +28,18 @@ TEST_CASE("Logging debug get date year should be valid for int", "[Logging]")
     const auto date{ax::logging::DebugProgramInfo::GetCurrentDate()};
     const auto year{date.year_};
 
-    ax::logging::Logging::Log(logging_level::Level::Debug, "Year: %d");
-
     REQUIRE(typeid(year) == typeid(int));
     REQUIRE(year > 0);
+}
+
+TEST_CASE("Log should not throw any exception", "[Logging]")
+{
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Verbose, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Info, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Warning, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Error, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Severe, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Fatal, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::All, "Logging test"));
+    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Debug, "Logging test"));
 }
