@@ -13,8 +13,7 @@ namespace ax::exception
     class window_creation_exception final : public ax::exception::exception_base
     {
     public:
-        explicit window_creation_exception(const std::string &message) : exception_base(message)
-        {}
+        using exception_base::exception_base;
     };
 }
 
