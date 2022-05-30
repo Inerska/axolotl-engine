@@ -130,7 +130,7 @@ namespace ax::logging
         public:
             inline friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoDate &buffer)
             {
-                os << buffer.GetMonthName(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
+                os << DebugProgramInfoDate::GetMonthName(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
                    << buffer.time_;
 
                 return os;
