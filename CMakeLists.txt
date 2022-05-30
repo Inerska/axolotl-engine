@@ -8,7 +8,7 @@ cmake_policy(SET CMP0091 NEW)
 project(AxolotlEngine LANGUAGES CXX C)
 
 # target
-add_library(AxolotlEngine INTERFACE)
+add_library(AxolotlEngine INTERFACE incl/Logging/LogLevel.h)
 target_include_directories(AxolotlEngine INTERFACE
     incl
 )
