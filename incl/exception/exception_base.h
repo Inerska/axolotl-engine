@@ -13,8 +13,7 @@ namespace ax::exception
     class exception_base : public std::runtime_error
     {
     public:
-        explicit exception_base(const std::string &message) : std::runtime_error(message)
-        {}
+        using runtime_error::runtime_error;
     };
 }
 #endif //_EXCEPTION_BASE_H
