@@ -6,14 +6,14 @@
 #ifndef _GLFW_INITIALIZATION_EXCEPTION_H
 #define _GLFW_INITIALIZATION_EXCEPTION_H
 
-#include "exception_base.h"
+#include "ExceptionBase.h"
 
 namespace ax::exception
 {
-    class glfw_initialization_exception final : public ax::exception::exception_base
+    class GlfwInitializationException final : public ax::exception::ExceptionBase
     {
     public:
-        using exception_base::exception_base;
+        using ExceptionBase::ExceptionBase;
     };
 }
 #endif //_GLFW_INITIALIZATION_EXCEPTION_H

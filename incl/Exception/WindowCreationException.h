@@ -3,17 +3,18 @@
 // Licensed under the GNU General Public License v3.0.
 // See the LICENSE file in the project root for more information.
 
-#ifndef _EXCEPTION_BASE_H
-#define _EXCEPTION_BASE_H
+#ifndef _WINDOW_CREATION_EXCEPTION_H
+#define _WINDOW_CREATION_EXCEPTION_H
 
-#include <stdexcept>
+#include "ExceptionBase.h"
 
 namespace ax::exception
 {
-    class exception_base : public std::runtime_error
+    class WindowCreationException final : public ax::exception::ExceptionBase
     {
     public:
-        using runtime_error::runtime_error;
+        using ExceptionBase::ExceptionBase;
     };
 }
-#endif //_EXCEPTION_BASE_H
+
+#endif //_WINDOW_CREATION_EXCEPTION_H

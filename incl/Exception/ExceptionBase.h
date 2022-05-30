@@ -3,18 +3,17 @@
 // Licensed under the GNU General Public License v3.0.
 // See the LICENSE file in the project root for more information.
 
-#ifndef _GLFW_NULL_ERROR_EXCEPTION_H
-#define _GLFW_NULL_ERROR_EXCEPTION_H
+#ifndef _EXCEPTION_BASE_H
+#define _EXCEPTION_BASE_H
 
-#include "exception_base.h"
+#include <stdexcept>
 
 namespace ax::exception
 {
-    class glfw_null_error_exception final : public ax::exception::exception_base
+    class ExceptionBase : public std::runtime_error
     {
     public:
-        using exception_base::exception_base;
+        using runtime_error::runtime_error;
     };
 }
-
-#endif //_GLFW_NULL_ERROR_EXCEPTION_H
+#endif //_EXCEPTION_BASE_H

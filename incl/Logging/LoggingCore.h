@@ -15,40 +15,47 @@ namespace ax::logging
     /**
      * @brief The LogLevel struct
      */
-    struct log_level_t
+    struct LogLevel
     {
         /**
          * @brief The LogLevel enum
          */
-        enum type
+        enum struct Level
         {
-            severe, fatal, error, warning, info, debug, verbose, all
+            Severe,
+            Fatal,
+            Error,
+            Warning,
+            Info,
+            Debug,
+            Verbose,
+            All
         };
 
         /**
-         * Returns the string representation of the given logging level.
+         * Returns the string representation of the given Logging level.
          * @param level
-         * @return The string representation of the given logging level.
+         * @return The string representation of the given Logging level.
          */
-        static const std::string to_string(const type &level)
+        static std::string ToString(const Level &level)
         {
             switch (level)
             {
-                case severe:
+                case Level::Severe:
                     return "SEVERE";
-                case fatal:
+                case Level::Fatal:
                     return "FATAL";
-                case error:
+                case Level::Error:
                     return "ERROR";
-                case warning:
+                case Level::Warning:
                     return "WARNING";
-                case info:
+                case Level::Info:
                     return "INFO";
-                case debug:
+                case Level::Debug:
                     return "DEBUG";
-                case verbose:
+                case Level::Verbose:
                     return "VERBOSE";
-                case all:
+                case Level::All:
                     return "ALL";
                 default:
                     return "UNKNOWN";
@@ -59,16 +66,16 @@ namespace ax::logging
     /**
      * @brief The Logger struct
      */
-    struct debug_program_info_t
+    struct DebugProgramInfo
     {
-        struct debug_program_info_time_t
+        struct DebugProgramInfoTime
         {
             int32_t hour_{};
             int32_t minute_{};
             int32_t second_{};
             bool is_pm_{};
 
-            friend std::ostream &operator<<(std::ostream &os, const debug_program_info_time_t &infoTime)
+            friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoTime &infoTime)
             {
                 os << infoTime.hour_ << ":" << infoTime.minute_ << ":" << infoTime.second_ << " "
                    << (infoTime.is_pm_ ? "PM" : "AM");
@@ -77,16 +84,16 @@ namespace ax::logging
             }
         };
 
-        struct debug_program_info_date_t
+        struct DebugProgramInfoDate
         {
             int month_{};
             int day_{};
             int year_{};
 
-            debug_program_info_time_t time_{};
+            DebugProgramInfoTime time_{};
 
         private:
-            inline std::string get_month_name(int month) const
+            inline std::string GetMonthName(int month) const
             {
                 switch (month)
                 {
@@ -121,9 +128,9 @@ namespace ax::logging
 
 
         public:
-            inline friend std::ostream &operator<<(std::ostream &os, const debug_program_info_date_t &buffer)
+            inline friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoDate &buffer)
             {
-                os << buffer.get_month_name(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
+                os << buffer.GetMonthName(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
                    << buffer.time_;
 
                 return os;
@@ -131,24 +138,24 @@ namespace ax::logging
         };
 
     private:
-        debug_program_info_date_t date_{};
+        DebugProgramInfoDate date_{};
 
         std::string program_name_{};
         std::string method_name_{};
     public:
 
-        static debug_program_info_date_t get_current_date()
+        static DebugProgramInfoDate GetCurrentDate()
         {
-            std::time_t time{std::time(0)};
+            std::time_t time{std::time(nullptr)};
             std::tm *local_time{std::localtime(&time)};
-            debug_program_info_time_t time_info{};
+            DebugProgramInfoTime time_info{};
 
             time_info.hour_ = local_time->tm_hour;
             time_info.minute_ = local_time->tm_min;
             time_info.second_ = local_time->tm_sec;
             time_info.is_pm_ = local_time->tm_hour > 12;
 
-            debug_program_info_date_t date_info{.time_ = time_info,};
+            DebugProgramInfoDate date_info{.time_ = time_info,};
 
             date_info.month_ = local_time->tm_mon + 1;
             date_info.day_ = local_time->tm_mday;
@@ -159,38 +166,38 @@ namespace ax::logging
 
     };
 
-    struct log_t
+    struct Logging
     {
         /**
-         * @brief Log function for the given logging level and message.
-         * @tparam T The type of the content to log.
-         * @param level The logging level.
-         * @param message The message to log.
+         * @brief Log function for the given Logging level and message.
+         * @tparam T The Level of the content to Log.
+         * @param level The Logging level.
+         * @param message The message to Log.
          */
         template<typename T>
-        constexpr static void log(const log_level_t::type &level, const T &message)
+        constexpr static void Log(const LogLevel::Level &level, const T &message)
         {
-            const auto date{debug_program_info_t::get_current_date()};
+            const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::log_level_t::to_string(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ax::logging::LogLevel::ToString(level) << ": " << message << "\n";
         }
 
         /**
-         * @brief Log function for the given logging level and message vargs.
-         * @tparam T The type of the content to log.
+         * @brief Log function for the given Logging level and message vargs.
+         * @tparam T The Level of the content to Log.
          * @tparam Vargs The types of the vargs.
-         * @param level The logging level.
-         * @param message The message to log.
+         * @param level The Logging level.
+         * @param message The message to Log.
          * @param args The vargs.
          */
         template<typename T, typename... Vargs>
-        constexpr static void log(const log_level_t::type &level, const T &message, const Vargs &... args)
+        constexpr static void Log(const LogLevel::Level &level, const T &message, const Vargs &... args)
         {
-            const auto date{debug_program_info_t::get_current_date()};
+            const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::log_level_t::to_string(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ax::logging::LogLevel::ToString(level) << ": " << message << "\n";
 
-            log(level, args...);
+            (Log(level, args), ...);
         }
     };
 };

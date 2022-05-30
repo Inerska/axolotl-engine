@@ -5,13 +5,13 @@
 
 #include <iostream>
 
-#include "wt/glfw_wrapper.h"
+#include "Wt/GlfwWrapper.h"
 
 int main()
 {
     std::cout << "sample hello-window" << std::endl;
 
-    auto window = ax::wt::window_t(640, 480, "Hello World");
+    auto window = ax::wt::Window(640, 480, "Hello World");
 
     #pragma unroll
     while (!window.should_close())

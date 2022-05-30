@@ -3,18 +3,18 @@
 // Licensed under the GNU General Public License v3.0.
 // See the LICENSE file in the project root for more information.
 
-#ifndef _WINDOW_CREATION_EXCEPTION_H
-#define _WINDOW_CREATION_EXCEPTION_H
+#ifndef _GLFW_NULL_ERROR_EXCEPTION_H
+#define _GLFW_NULL_ERROR_EXCEPTION_H
 
-#include "exception_base.h"
+#include "ExceptionBase.h"
 
 namespace ax::exception
 {
-    class window_creation_exception final : public ax::exception::exception_base
+    class GlfwNullErrorException final : public ax::exception::ExceptionBase
     {
     public:
-        using exception_base::exception_base;
+        using ExceptionBase::ExceptionBase;
     };
 }
 
-#endif //_WINDOW_CREATION_EXCEPTION_H
+#endif //_GLFW_NULL_ERROR_EXCEPTION_H

@@ -8,11 +8,11 @@
 
 #include <string>
 #include <GLFW/glfw3.h>
-#include "../exception/glfw_null_error_exception.h"
+#include "../Exception/GlfwNullErrorException.h"
 
 namespace ax::service
 {
-    class glfw_error_humanizer_service
+    class GLfwErrorHumanizerService
     {
     public:
         static inline std::string get_human_readable_error() noexcept

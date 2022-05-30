@@ -5,30 +5,30 @@
 
 #include <catch2/catch.hpp>
 #include <string>
-#include "logging/logging_core.h"
+#include "Logging/LoggingCore.h"
 
-using logging_core = ax::logging::log_t;
-using logging_level = ax::logging::log_level_t;
+using logging_core = ax::logging::Logging;
+using logging_level = ax::logging::LogLevel;
 
-TEST_CASE("Logging level string is the same as expected", "[logging]")
+TEST_CASE("Logging level string is the same as expected", "[Logging]")
 {
-    REQUIRE(std::string(logging_level::to_string(logging_level::verbose)).compare("VERBOSE") == 0);
+    REQUIRE(std::string(logging_level::ToString(logging_level::Level::Verbose)).compare("VERBOSE") == 0);
 }
 
-TEST_CASE("Logging debug get day should be valid for int", "[logging]")
+TEST_CASE("Logging debug get day should be valid for int", "[Logging]")
 {
-    const auto date{ax::logging::debug_program_info_t::get_current_date()};
+    const auto date{ax::logging::DebugProgramInfo::GetCurrentDate()};
 
     REQUIRE(date.day_ > 0);
     REQUIRE(date.day_ <= 31);
 }
 
-TEST_CASE("Logging debug get date year should be valid for int", "[logging]")
+TEST_CASE("Logging debug get date year should be valid for int", "[Logging]")
 {
-    const auto date{ax::logging::debug_program_info_t::get_current_date()};
+    const auto date{ax::logging::DebugProgramInfo::GetCurrentDate()};
     const auto year{date.year_};
 
-    ax::logging::log_t::log(logging_level::debug, "Year: %d");
+    ax::logging::Logging::Log(logging_level::Level::Debug, "Year: %d");
 
     REQUIRE(typeid(year) == typeid(int));
     REQUIRE(year > 0);
