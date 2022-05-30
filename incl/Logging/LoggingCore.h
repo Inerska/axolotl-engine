@@ -82,7 +82,7 @@ namespace ax::logging
 
                 return os;
             }
-        } __attribute__((aligned(16)));
+        };
 
         struct DebugProgramInfoDate
         {
@@ -164,7 +164,7 @@ namespace ax::logging
             return date_info;
         }
 
-    } __attribute__((aligned(128)));
+    };
 
     struct Logging
     {
