@@ -7,12 +7,11 @@
 #include <string>
 #include "Logging/Log.h"
 
-using logging_core = ax::logging::Logging;
-using logging_level = ax::logging::LogLevel;
+using logging_level = ax::logging::Level;
 
 TEST_CASE("Logging level string is the same as expected", "[Logging]")
 {
-    REQUIRE(std::string(logging_level::ToString(logging_level::Level::Verbose)).compare("VERBOSE") == 0);
+    REQUIRE(std::string(ax::logging::ToString(logging_level::Verbose)).compare("VERBOSE") == 0);
 }
 
 TEST_CASE("Logging debug get day should be valid for int", "[Logging]")
@@ -34,12 +33,5 @@ TEST_CASE("Logging debug get date year should be valid for int", "[Logging]")
 
 TEST_CASE("Log should not throw any exception", "[Logging]")
 {
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Verbose, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Info, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Warning, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Error, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Severe, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Fatal, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::All, "Logging test"));
-    REQUIRE_NOTHROW(logging_core::Log(logging_level::Level::Debug, "Logging test"));
+    REQUIRE_NOTHROW(ax::logging::Logging::Log(logging_level::Verbose, "Logging test"));
 }

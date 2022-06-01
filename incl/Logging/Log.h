@@ -125,11 +125,11 @@ namespace ax::logging
          * @param message The message to Log.
          */
         template<typename T>
-        constexpr static void Log(const LogLevel::Level &level, const T &message)
+        constexpr static void Log(const ax::logging::Level &level, const T &message)
         {
             const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::LogLevel::ToString(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ax::logging::ToString(level) << ": " << message << "\n";
         }
 
         /**
@@ -141,11 +141,11 @@ namespace ax::logging
          * @param args The vargs.
          */
         template<typename T, typename... Vargs>
-        constexpr static void Log(const LogLevel::Level &level, const T &message, const Vargs &... args)
+        constexpr static void Log(const ax::logging::Level &level, const T &message, const Vargs &... args)
         {
             const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::LogLevel::ToString(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ax::logging::ToString(level) << ": " << message << "\n";
 
             (Log(level, args), ...);
         }
