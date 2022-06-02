@@ -9,12 +9,12 @@
 #include <memory>
 #include <string>
 
-#include "Service/GLfwErrorHumanizerService.h"
+#include "Service/GLfwErrorHumanizerService.hpp"
 
-#include "Exception/GlfwInitializationException.h"
-#include "Exception/WindowCreationException.h"
+#include "Exception/GlfwInitializationException.hpp"
+#include "Exception/WindowCreationException.hpp"
 
-#include "GlfwConfigCook.h"
+#include "GlfwConfigCook.hpp"
 
 namespace ax::wt {
     class Window {

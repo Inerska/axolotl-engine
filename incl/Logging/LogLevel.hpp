@@ -3,8 +3,8 @@
 // Licensed under the GNU General Public License v3.0.
 // See the LICENSE file in the project root for more information.
 
-#ifndef AXOLOTLENGINE_LOGLEVEL_H
-#define AXOLOTLENGINE_LOGLEVEL_H
+#ifndef AXOLOTLENGINE_LOGLEVEL_HPP
+#define AXOLOTLENGINE_LOGLEVEL_HPP
 
 #include <string>
 
@@ -49,4 +49,4 @@ namespace ax::logging
     }
 };
 
-#endif //AXOLOTLENGINE_LOGLEVEL_H
+#endif //AXOLOTLENGINE_LOGLEVEL_HPP

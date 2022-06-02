@@ -9,7 +9,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include "LogLevel.h"
+#include "LogLevel.hpp"
 
 namespace ax::logging
 {

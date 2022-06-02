@@ -5,7 +5,7 @@
 
 #include <catch2/catch.hpp>
 #include <string>
-#include "Logging/Log.h"
+#include "Logging/Log.hpp"
 
 using logging_level = ax::logging::Level;
 

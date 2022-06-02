@@ -8,7 +8,7 @@
 
 #include <string>
 #include <GLFW/glfw3.h>
-#include "../Exception/GlfwNullErrorException.h"
+#include "../Exception/GlfwNullErrorException.hpp"
 
 namespace ax::service
 {
