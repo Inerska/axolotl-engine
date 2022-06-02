@@ -11,7 +11,7 @@ do
     set_kind "headeronly"
     set_warnings("all", "error")
     set_languages "cxx20"
-    add_headerfiles "incl/**.h"
+    add_headerfiles "incl/**.hpp"
     add_includedirs("incl", { interface = true })
 
 end
