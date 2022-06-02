@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-#include "Wt/GlfwWrapper.h"
+#include "Wt/GlfwWrapper.hpp"
 
 int main()
 {
