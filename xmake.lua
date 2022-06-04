@@ -1,7 +1,7 @@
 ﻿set_project "AxolotlEngine"
 
-add_requires("glad", "glfw", { system = false })
-add_packages("glfw", "glad")
+add_requires("glad", "glfw", "conan::flecs/2.4.8", { system = false })
+add_packages("glfw", "glad", "flecs")
 
 add_rules("mode.debug", "mode.release")
 
