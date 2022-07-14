@@ -53,6 +53,8 @@ namespace ax::wt
 
             glfwMakeContextCurrent(window);
 
+            gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
@@ -79,6 +81,11 @@ namespace ax::wt
         void Terminate() const
         {
             glfwTerminate();
+        }
+
+        bool dbg() const noexcept
+        {
+            return true;//GLEW_OK == glewInit();
         }
     };
 } // namespace ax::wt
