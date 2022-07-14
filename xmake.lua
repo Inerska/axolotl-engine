@@ -1,7 +1,7 @@
 ﻿set_project "AxolotlEngine"
 
-add_requires("glad", "glfw", "glew", { system = false })
-add_packages("glfw", "glad", "glew")
+add_requires("glad", "glfw", "glew", "glm", { system = false })
+add_packages("glfw", "glad", "glew", "glm")
 
 add_rules("mode.debug", "mode.release")
 add_rules("plugin.vsxmake.autoupdate")
