@@ -18,7 +18,7 @@
 
 namespace ax::wt
 {
-    struct WindowCreatingParameters
+    struct WindowCreateParameters
     {
         int32_t width;
         int32_t height;
@@ -63,7 +63,7 @@ namespace ax::wt
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
-        Window(const WindowCreatingParameters& parameters, std::string&& title) : Window(
+        Window(const WindowCreateParameters& parameters, std::string&& title) : Window(
             parameters.width, parameters.height,
             std::move(title))
         {
