@@ -18,6 +18,12 @@
 
 namespace ax::wt
 {
+    struct WindowCreatingParameters
+    {
+        int32_t width;
+        int32_t height;
+    };
+
     class Window
     {
         std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> buffer_{nullptr, nullptr};
@@ -29,19 +35,18 @@ namespace ax::wt
         Window() noexcept
         = default;
 
-        Window(const int32_t width, const int32_t height, std::string title) : width_(width), height_(height),
-                                                                               title_(std::move(title))
+        Window(int32_t width, int32_t height, std::string&& title) : width_(width), height_(height),
+                                                                     title_(title)
         {
             if (glfwInit() == GLFW_FALSE)
             {
                 const auto error = service::GLfwErrorHumanizerService::GetError();
 
                 std::cout << "GLFW initialization failed: " << error << std::endl;
-
                 throw exception::GlfwInitializationException("GLFW initialization failed");
             }
 
-            auto *window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
+            auto* window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
 
             if (window == nullptr)
             {
@@ -58,8 +63,9 @@ namespace ax::wt
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
-        Window(const std::tuple<int32_t, int32_t>& size, std::string title) : Window(std::get<0>(size), std::get<1>(size),
-                                                                                    std::move(title))
+        Window(const WindowCreatingParameters& parameters, std::string&& title) : Window(
+            parameters.width, parameters.height,
+            std::move(title))
         {
         }
 
@@ -81,11 +87,6 @@ namespace ax::wt
         void Terminate() const
         {
             glfwTerminate();
-        }
-
-        bool dbg() const noexcept
-        {
-            return true;//GLEW_OK == glewInit();
         }
     };
 } // namespace ax::wt
