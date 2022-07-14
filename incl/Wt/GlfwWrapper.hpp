@@ -56,6 +56,11 @@ namespace ax::wt
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
+        Window(const std::tuple<int32_t, int32_t>& size, std::string title) : Window(std::get<0>(size), std::get<1>(size),
+                                                                                    std::move(title))
+        {
+        }
+
         [[nodiscard]] bool ShouldClose() const
         {
             return static_cast<bool>(glfwWindowShouldClose(buffer_.get()));
