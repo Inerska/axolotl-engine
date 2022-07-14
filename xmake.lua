@@ -1,9 +1,10 @@
 ﻿set_project "AxolotlEngine"
 
-add_requires("glad", "glfw", "conan::flecs/2.4.8", { system = false })
-add_packages("glfw", "glad", "flecs")
+add_requires("glad", "glfw", { system = false })
+add_packages("glfw", "glad")
 
 add_rules("mode.debug", "mode.release")
+add_rules("plugin.vsxmake.autoupdate")
 
 target "AxolotlEngine"
 

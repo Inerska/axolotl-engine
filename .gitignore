@@ -13,4 +13,5 @@ cmake-build-debug
 .vs
 
 CMakeLists.txt
+vsxmake2022
 
