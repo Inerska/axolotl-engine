@@ -11,21 +11,21 @@ using logging_level = ax::logging::Level;
 
 TEST_CASE("Logging level string is the same as expected", "[Logging]")
 {
-    REQUIRE(std::string(ax::logging::ToString(logging_level::Verbose)).compare("VERBOSE") == 0);
+    REQUIRE(std::string(ax::logging::ToString(logging_level::Verbose)) == "VERBOSE");
 }
 
 TEST_CASE("Logging debug get day should be valid for int", "[Logging]")
 {
-    const auto date{ax::logging::DebugProgramInfo::GetCurrentDate()};
+    const auto [month, day, year, time]{ax::logging::DebugProgramInfo::GetCurrentDate()};
 
-    REQUIRE(date.day_ > 0);
-    REQUIRE(date.day_ <= 31);
+    REQUIRE(day > 0);
+    REQUIRE(day <= 31);
 }
 
 TEST_CASE("Logging debug get date year should be valid for int", "[Logging]")
 {
     const auto date{ax::logging::DebugProgramInfo::GetCurrentDate()};
-    const auto year{date.year_};
+    const auto year{date.year};
 
     REQUIRE(typeid(year) == typeid(int));
     REQUIRE(year > 0);

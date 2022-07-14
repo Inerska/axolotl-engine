@@ -15,38 +15,45 @@ namespace ax::logging
      */
     enum struct Level
     {
-        Severe, Fatal, Error, Warning, Info, Debug, Verbose, All
+        Severe,
+        Fatal,
+        Error,
+        Warning,
+        Info,
+        Debug,
+        Verbose,
+        All
     };
 
     /**
      * Returns the string representation of the given Logging level.
-     * @param level
+     * @param level The Logging level.
      * @return The string representation of the given Logging level.
      */
-    static std::string ToString(const Level &level)
+    static std::string ToString(const Level& level)
     {
         switch (level)
         {
-            case Level::Severe:
-                return "SEVERE";
-            case Level::Fatal:
-                return "FATAL";
-            case Level::Error:
-                return "ERROR";
-            case Level::Warning:
-                return "WARNING";
-            case Level::Info:
-                return "INFO";
-            case Level::Debug:
-                return "DEBUG";
-            case Level::Verbose:
-                return "VERBOSE";
-            case Level::All:
-                return "ALL";
-            default:
-                return "UNKNOWN";
+        case Level::Severe:
+            return "SEVERE";
+        case Level::Fatal:
+            return "FATAL";
+        case Level::Error:
+            return "ERROR";
+        case Level::Warning:
+            return "WARNING";
+        case Level::Info:
+            return "INFO";
+        case Level::Debug:
+            return "DEBUG";
+        case Level::Verbose:
+            return "VERBOSE";
+        case Level::All:
+            return "ALL";
+        default:
+            return "UNKNOWN";
         }
     }
-};
+} // namespace ax::logging
 
 #endif //AXOLOTLENGINE_LOGLEVEL_HPP

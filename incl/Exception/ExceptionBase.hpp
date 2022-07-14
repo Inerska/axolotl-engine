@@ -15,5 +15,5 @@ namespace ax::exception
     public:
         using runtime_error::runtime_error;
     };
-}
+} // namespace ax::exception
 #endif //_EXCEPTION_BASE_H

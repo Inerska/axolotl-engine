@@ -10,10 +10,10 @@
 
 namespace ax::exception
 {
-    class GlfwInitializationException final : public ax::exception::ExceptionBase
+    class GlfwInitializationException final : public ExceptionBase
     {
     public:
         using ExceptionBase::ExceptionBase;
     };
-}
+} // namespace ax::exception
 #endif //_GLFW_INITIALIZATION_EXCEPTION_H

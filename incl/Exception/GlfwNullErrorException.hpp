@@ -10,11 +10,11 @@
 
 namespace ax::exception
 {
-    class GlfwNullErrorException final : public ax::exception::ExceptionBase
+    class GlfwNullErrorException final : public ExceptionBase
     {
     public:
         using ExceptionBase::ExceptionBase;
     };
-}
+} // namespace ax::exception
 
 #endif //_GLFW_NULL_ERROR_EXCEPTION_H

@@ -11,13 +11,13 @@ int main()
 {
     std::cout << "sample hello-window" << std::endl;
 
-    auto window = ax::wt::Window(640, 480, "Hello World");
+    const auto window = ax::wt::Window(640, 480, "Hello World");
 
     #pragma unroll
-    while (!window.should_close())
+    while (!window.ShouldClose())
     {
-        window.swap_buffers();
-        window.poll_events();
+        window.SwapBuffers();
+        window.PollEvents();
     }
 
     return 0;

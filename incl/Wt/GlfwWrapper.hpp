@@ -16,36 +16,39 @@
 
 #include "GlfwConfigCook.hpp"
 
-namespace ax::wt {
-    class Window {
-    private:
+namespace ax::wt
+{
+    class Window
+    {
         std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)> buffer_{nullptr, nullptr};
         int32_t width_{0};
         int32_t height_{0};
         std::string title_{"Axolotl Engine"};
 
     public:
-
         Window() noexcept
         = default;
 
-        Window(int32_t width, int32_t height, std::string title) : width_(width), height_(height),
-                                                                   title_(std::move(title)) {
-            if (glfwInit() == GLFW_FALSE) {
-                auto error = ax::service::GLfwErrorHumanizerService::GetError();
+        Window(const int32_t width, const int32_t height, std::string title) : width_(width), height_(height),
+                                                                               title_(std::move(title))
+        {
+            if (glfwInit() == GLFW_FALSE)
+            {
+                const auto error = service::GLfwErrorHumanizerService::GetError();
 
                 std::cout << "GLFW initialization failed: " << error << std::endl;
 
-                throw ax::exception::GlfwInitializationException("GLFW initialization failed");
+                throw exception::GlfwInitializationException("GLFW initialization failed");
             }
 
             auto *window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
 
-            if (window == nullptr) {
-                auto error = ax::service::GLfwErrorHumanizerService::GetError();
+            if (window == nullptr)
+            {
+                const auto error = service::GLfwErrorHumanizerService::GetError();
 
                 std::cout << "Window creation failed with error: " << error << std::endl;
-                throw ax::exception::WindowCreationException(error);
+                throw exception::WindowCreationException(error);
             }
 
             glfwMakeContextCurrent(window);
@@ -53,17 +56,20 @@ namespace ax::wt {
             buffer_ = std::unique_ptr<GLFWwindow, decltype(&glfwDestroyWindow)>(window, &glfwDestroyWindow);
         }
 
-        [[nodiscard]] inline bool should_close() const {
-            return glfwWindowShouldClose(buffer_.get());
+        [[nodiscard]] bool ShouldClose() const
+        {
+            return static_cast<bool>(glfwWindowShouldClose(buffer_.get()));
         }
 
-        inline void swap_buffers() const {
+        void SwapBuffers() const
+        {
             glfwSwapBuffers(buffer_.get());
         }
 
-        inline void poll_events() const {
+        void PollEvents() const
+        {
             glfwPollEvents();
         }
     };
-} // namespace ax::Wt
+} // namespace ax::wt
 #endif //_GLFW_WRAPPER_H

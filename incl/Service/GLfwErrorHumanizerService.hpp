@@ -15,7 +15,7 @@ namespace ax::service
     class GLfwErrorHumanizerService
     {
     public:
-        static inline std::string GetError() noexcept
+        static std::string GetError() noexcept
         {
             const char *error = nullptr;
             (void)glfwGetError(&error);

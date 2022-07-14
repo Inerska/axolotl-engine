@@ -6,10 +6,9 @@
 #ifndef AXOLOTL_ENGINE_LOGGING_CORE_H
 #define AXOLOTL_ENGINE_LOGGING_CORE_H
 
-#include <string>
-#include <sstream>
-#include <iostream>
 #include "LogLevel.hpp"
+#include <iostream>
+#include <string>
 
 namespace ax::logging
 {
@@ -20,15 +19,15 @@ namespace ax::logging
     {
         struct DebugProgramInfoTime
         {
-            int32_t hour_{};
-            int32_t minute_{};
-            int32_t second_{};
-            bool isPm_{};
+            int32_t hour{};
+            int32_t minute{};
+            int32_t second{};
+            bool is_pm{};
 
-            friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoTime &infoTime)
+            friend std::ostream& operator<<(std::ostream& os, const DebugProgramInfoTime& infoTime)
             {
-                os << infoTime.hour_ << ":" << infoTime.minute_ << ":" << infoTime.second_ << " "
-                   << (infoTime.isPm_ ? "PM" : "AM");
+                os << infoTime.hour << ":" << infoTime.minute << ":" << infoTime.second << " "
+                    << (infoTime.is_pm ? "PM" : "AM");
 
                 return os;
             }
@@ -36,52 +35,52 @@ namespace ax::logging
 
         struct DebugProgramInfoDate
         {
-            int month_{};
-            int day_{};
-            int year_{};
+            int month{};
+            int day{};
+            int year{};
 
-            DebugProgramInfoTime time_{};
+            DebugProgramInfoTime time{};
 
         private:
-            [[nodiscard]] static inline std::string GetMonthName(int month)
+            [[nodiscard]] static std::string GetMonthName(const int month)
             {
                 switch (month)
                 {
-                    case 1:
-                        return "January";
-                    case 2:
-                        return "February";
-                    case 3:
-                        return "March";
-                    case 4:
-                        return "April";
-                    case 5:
-                        return "May";
-                    case 6:
-                        return "June";
-                    case 7:
-                        return "July";
-                    case 8:
-                        return "August";
-                    case 9:
-                        return "September";
-                    case 10:
-                        return "October";
-                    case 11:
-                        return "November";
-                    case 12:
-                        return "December";
-                    default:
-                        return "Unknown";
+                case 1:
+                    return "January";
+                case 2:
+                    return "February";
+                case 3:
+                    return "March";
+                case 4:
+                    return "April";
+                case 5:
+                    return "May";
+                case 6:
+                    return "June";
+                case 7:
+                    return "July";
+                case 8:
+                    return "August";
+                case 9:
+                    return "September";
+                case 10:
+                    return "October";
+                case 11:
+                    return "November";
+                case 12:
+                    return "December";
+                default:
+                    return "Unknown";
                 }
             }
 
 
         public:
-            inline friend std::ostream &operator<<(std::ostream &os, const DebugProgramInfoDate &buffer)
+            friend std::ostream& operator<<(std::ostream& os, const DebugProgramInfoDate& buffer)
             {
-                os << DebugProgramInfoDate::GetMonthName(buffer.month_) << " " << buffer.day_ << ", " << buffer.year_ << " "
-                   << buffer.time_;
+                os << GetMonthName(buffer.month) << " " << buffer.day << ", " << buffer.year << " "
+                    << buffer.time;
 
                 return os;
             }
@@ -90,30 +89,28 @@ namespace ax::logging
     private:
         DebugProgramInfoDate date_{};
 
-        std::string programName_{};
-        std::string methodName_{};
+        std::string program_name_{};
+        std::string method_name_{};
     public:
-
         static DebugProgramInfoDate GetCurrentDate()
         {
-            std::time_t time{std::time(nullptr)};
-            std::tm *local_time{std::localtime(&time)};
-            DebugProgramInfoTime time_info{};
+            const std::time_t time{std::time(nullptr)};
+            const std::tm *local_time{std::localtime(&time)};
+            DebugProgramInfoTime time_info;
 
-            time_info.hour_ = local_time->tm_hour;
-            time_info.minute_ = local_time->tm_min;
-            time_info.second_ = local_time->tm_sec;
-            time_info.isPm_ = local_time->tm_hour > 12;
+            time_info.hour = local_time->tm_hour;
+            time_info.minute = local_time->tm_min;
+            time_info.second = local_time->tm_sec;
+            time_info.is_pm = local_time->tm_hour > 12;
 
-            DebugProgramInfoDate date_info{.time_ = time_info,};
+            DebugProgramInfoDate date_info{.time = time_info,};
 
-            date_info.month_ = local_time->tm_mon + 1;
-            date_info.day_ = local_time->tm_mday;
-            date_info.year_ = local_time->tm_year + 1900;
+            date_info.month = local_time->tm_mon + 1;
+            date_info.day = local_time->tm_mday;
+            date_info.year = local_time->tm_year + 1900;
 
             return date_info;
         }
-
     };
 
     struct Logging
@@ -124,32 +121,32 @@ namespace ax::logging
          * @param level The Logging level.
          * @param message The message to Log.
          */
-        template<typename T>
-        constexpr static void Log(const ax::logging::Level &level, const T &message)
+        template <typename T>
+        constexpr static void Log(const Level& level, const T& message)
         {
             const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::ToString(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ToString(level) << ": " << message << "\n";
         }
 
         /**
          * @brief Log function for the given Logging level and message vargs.
          * @tparam T The Level of the content to Log.
-         * @tparam Vargs The types of the vargs.
+         * @tparam VArgs The types of the vargs.
          * @param level The Logging level.
          * @param message The message to Log.
          * @param args The vargs.
          */
-        template<typename T, typename... Vargs>
-        constexpr static void Log(const ax::logging::Level &level, const T &message, const Vargs &... args)
+        template <typename T, typename... VArgs>
+        constexpr static void Log(const Level& level, const T& message, const VArgs&... args)
         {
             const auto date{DebugProgramInfo::GetCurrentDate()};
 
-            std::cerr << date << "\n" << ax::logging::ToString(level) << ": " << message << "\n";
+            std::cerr << date << "\n" << ToString(level) << ": " << message << "\n";
 
             (Log(level, args), ...);
         }
     };
-}
+} // namespace ax::logging
 
 #endif //AXOLOTL_ENGINE_LOGGING_CORE_H

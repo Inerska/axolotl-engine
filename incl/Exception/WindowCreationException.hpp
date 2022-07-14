@@ -10,11 +10,11 @@
 
 namespace ax::exception
 {
-    class WindowCreationException final : public ax::exception::ExceptionBase
+    class WindowCreationException final : public ExceptionBase
     {
     public:
         using ExceptionBase::ExceptionBase;
     };
-}
+} // namespace ax::exception
 
 #endif //_WINDOW_CREATION_EXCEPTION_H
