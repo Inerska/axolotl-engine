@@ -75,6 +75,11 @@ namespace ax::wt
         {
             glfwPollEvents();
         }
+
+        void Terminate() const
+        {
+            glfwTerminate();
+        }
     };
 } // namespace ax::wt
 #endif //_GLFW_WRAPPER_H
