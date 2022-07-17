@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <string>
+#include <glm/vec3.hpp>
 
 #include "Service/GLfwErrorHumanizerService.hpp"
 
@@ -40,17 +41,17 @@ namespace ax::wt
         {
             if (glfwInit() == GLFW_FALSE)
             {
-                const auto error = service::GLfwErrorHumanizerService::GetError();
+                const auto error{service::GLfwErrorHumanizerService::GetError()};
 
                 std::cout << "GLFW initialization failed: " << error << std::endl;
                 throw exception::GlfwInitializationException("GLFW initialization failed");
             }
 
-            auto* window = glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr);
+            auto* window{glfwCreateWindow(width_, height_, title_.c_str(), nullptr, nullptr)};
 
             if (window == nullptr)
             {
-                const auto error = service::GLfwErrorHumanizerService::GetError();
+                const auto error{service::GLfwErrorHumanizerService::GetError()};
 
                 std::cout << "Window creation failed with error: " << error << std::endl;
                 throw exception::WindowCreationException(error);
