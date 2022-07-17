@@ -10,7 +10,7 @@
 int main()
 {
     std::cout << "sample hello-window" << std::endl;
-	
+
     constexpr int32_t width = 800;
     constexpr int32_t height = 480;
 
@@ -21,8 +21,19 @@ int main()
         window.SwapBuffers();
         window.PollEvents();
 
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(1.f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.07, 0.13, 0.17f, 1.0f);
+
+        glBegin(GL_TRIANGLES);
+        
+        glVertex2f(-0.5F, 0.5F);
+        glVertex2f(0.5F, 0.5F);
+        glVertex2f(0.0F, -0.5F);
+
+        glColor3f(0.0, 1.0, 1.0);
+        
+        glEnd();
     }
 
     window.Terminate();
