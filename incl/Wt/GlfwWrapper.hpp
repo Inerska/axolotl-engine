@@ -10,12 +10,14 @@
 #include <string>
 #include <glm/vec3.hpp>
 
+#include "ApplicationContext.hpp"
 #include "Service/GLfwErrorHumanizerService.hpp"
 
 #include "Exception/GlfwInitializationException.hpp"
 #include "Exception/WindowCreationException.hpp"
 
 #include "GlfwConfigCook.hpp"
+#include "Service/Loader/ShaderLoaderService.hpp"
 
 namespace ax::wt
 {
@@ -32,6 +34,8 @@ namespace ax::wt
         int32_t height_{0};
         std::string title_{"Axolotl Engine"};
 
+        std::shared_ptr<Hypodermic::Container> context_{};
+
     public:
         Window() noexcept
         = default;
@@ -39,9 +43,13 @@ namespace ax::wt
         Window(int32_t width, int32_t height, std::string&& title) : width_(width), height_(height),
                                                                      title_(title)
         {
+            context_ = ApplicationContext().Build();
+
+            const auto service{context_->resolve<service::GLfwErrorHumanizerService>()};
+
             if (glfwInit() == GLFW_FALSE)
             {
-                const auto error{service::GLfwErrorHumanizerService::GetError()};
+                const auto error{service->GetError()};
 
                 std::cout << "GLFW initialization failed: " << error << std::endl;
                 throw exception::GlfwInitializationException("GLFW initialization failed");
@@ -51,7 +59,7 @@ namespace ax::wt
 
             if (window == nullptr)
             {
-                const auto error{service::GLfwErrorHumanizerService::GetError()};
+                const auto error{service->GetError()};
 
                 std::cout << "Window creation failed with error: " << error << std::endl;
                 throw exception::WindowCreationException(error);
