@@ -1,5 +1,0 @@
-﻿---
-Checks: '*, -fuchsia-*, -google-*, -zircon-*, -modernize-use-trailing-return-type'
-WarningsAsErrors: '1'
-HeaderFilterRegex: ''
-FormatStyle: none
