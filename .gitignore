@@ -1,17 +1,18 @@
-# Xmake cache
-.xmake/
-build/
-
-# Idea cache
+# Idea config folder
 .idea
 
-# MacOS Cache
-.DS_Store
-
-cmake-build-debug
-
-.vs
-
-CMakeLists.txt
-vsxmake2022
-
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
